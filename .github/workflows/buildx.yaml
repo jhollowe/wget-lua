@@ -18,6 +18,8 @@ jobs:
         # with:
         # submodules: true
       - name: repo-name
+        env:
+          GITHUB_REPOSITORY: "org/repo"
         run: |
           echo "::set-output name=repo::${GITHUB_REPOSITORY#*/}"
           echo "::set-output name=org::${GITHUB_REPOSITORY#/*}"
