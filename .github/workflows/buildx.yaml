@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: true
 
+        # do not clone in the unused submodule
+        # with:
+        # submodules: true
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
