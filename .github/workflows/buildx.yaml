@@ -9,7 +9,7 @@ jobs:
   build-and-push:
     runs-on: "ubuntu-latest"
     # only build and push when this is a push of new tag
-    if: contains(${{github.ref}}, "refs/tags")
+    if: ${{ startsWith( github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
