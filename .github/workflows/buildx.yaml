@@ -19,10 +19,10 @@ jobs:
         # submodules: true
       - name: repo-name
         env:
-          GITHUB_REPOSITORY: "org/repo"
+          TEST: "org/repo"
         run: |
-          echo "::set-output name=repo::${GITHUB_REPOSITORY#*/}"
-          echo "::set-output name=org::${GITHUB_REPOSITORY#/*}"
+          echo "::set-output name=repo::${TEST#*/}"
+          echo "::set-output name=org::${TEST#/*}"
 
       - name: Docker meta
         id: docker_meta
