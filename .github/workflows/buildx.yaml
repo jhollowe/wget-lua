@@ -18,11 +18,10 @@ jobs:
         # with:
         # submodules: true
       - name: repo-name
-        env:
-          TEST: "org/repo"
         run: |
-          echo "::set-output name=repo::${TEST#*/}"
-          echo "::set-output name=org::${TEST#/*}"
+          echo "::set-output name=repo::${GITHUB_REPOSITORY#*/}"
+          echo "::set-output name=org::${GITHUB_REPOSITORY%/*}"
+          printf "::group::Outputs:\nrepo: ${GITHUB_REPOSITORY#*/}\norg: ${GITHUB_REPOSITORY%/*}\n::endgroup::"
 
       - name: Docker meta
         id: docker_meta
