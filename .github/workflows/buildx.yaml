@@ -2,14 +2,19 @@
 
 name: Build and push image to Docker Hub
 
+#
+# This Action builds images for new tags and pull requests
+#  builds of tags are pushed to Docker Hub
+#
+
 on:
   push: {}
 
 jobs:
   build-and-push:
     runs-on: "ubuntu-latest"
-    # only build and push when this is a push of new tag
-    if: ${{ startsWith( github.ref, 'refs/tags/') }}
+    # only build and push when this is a push of new tag or a PR
+    if: ${{ startsWith( github.ref, 'refs/tags/') || github.event_name == 'pull_request' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -50,7 +55,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
