@@ -14,10 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-        # do not clone in the unused submodule
-        # with:
-        # submodules: true
-      - name: repo-name
+      - name: Parse Repo Name
+        id: repo-name
         run: |
           echo "::set-output name=repo::${GITHUB_REPOSITORY#*/}"
           echo "::set-output name=org::${GITHUB_REPOSITORY%/*}"
