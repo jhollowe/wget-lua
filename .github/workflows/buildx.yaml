@@ -17,12 +17,17 @@ jobs:
         # do not clone in the unused submodule
         # with:
         # submodules: true
+      - name: repo-name
+        run: |
+          echo "::set-output name=repo::${GITHUB_REPOSITORY#*/}"
+          echo "::set-output name=org::${GITHUB_REPOSITORY#/*}"
+
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           # tag and push to <docker_username>/<repo_name>
-          images: ${{ secrets.DOCKER_USERNAME }}/${GITHUB_REPOSITORY#*/}
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.repo-name.outputs.repo }}
           tag-semver: |
             {{major}}.{{minor}}.{{patch}}
             {{major}}.{{minor}}
