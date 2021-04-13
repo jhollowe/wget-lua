@@ -1,4 +1,5 @@
-FROM debian:buster-slim AS wget_build
+ARG ARCH=
+FROM ${ARCH}debian:buster-slim AS wget_build
 COPY . /tmp/wget
 ARG TLSTYPE=openssl
 RUN set -eux \
